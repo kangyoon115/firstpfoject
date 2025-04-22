@@ -6,6 +6,7 @@ import com.example.firstproject.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ArticleController {
@@ -17,15 +18,18 @@ public class ArticleController {
         return "articles/new";
     }
 
-    @GetMapping("/articles/create")
+    @PostMapping("/articles/create")
     public String createArticle(ArticelForm form){
         System.out.println(form.toString());
+
         //1. DTO를 엔티티로 변환
         Article article=form.toEntity();
         System.out.println(article.toString());
+
         //2. 리파지터리로 엔티티를 DB에 저장
         Article saved=articleRepository.save(article);
         System.out.println(saved.toString());
+
         return "";
     }
 }
